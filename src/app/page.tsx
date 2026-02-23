@@ -9,7 +9,7 @@ export default function Home() {
           <span className="text-blue-600">AI</span> おもしろツール集
         </h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-          AIを使った便利でちょっと変わったツールたち。無料で使えます。
+          AIを使った便利でちょっと変わったツールたち。1日3回まで無料。
         </p>
       </section>
 
