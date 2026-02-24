@@ -4,6 +4,7 @@ import { useState } from "react";
 import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import ShareButtons from "@/components/ShareButtons";
+import { apiHeaders } from "@/lib/api-key";
 
 interface Translation {
   original: string;
@@ -38,7 +39,7 @@ export default function MailTrueMeaningPage() {
     try {
       const res = await fetch("/api/tools/mail-true-meaning", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ text }),
       });
       const data = await res.json();

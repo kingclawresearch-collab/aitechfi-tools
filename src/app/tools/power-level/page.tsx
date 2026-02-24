@@ -4,6 +4,7 @@ import { useState } from "react";
 import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import ShareButtons from "@/components/ShareButtons";
+import { apiHeaders } from "@/lib/api-key";
 
 interface Stats {
   intelligence: number;
@@ -54,7 +55,7 @@ export default function PowerLevelPage() {
     try {
       const res = await fetch("/api/tools/power-level", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ job, skills, income, fitness }),
       });
       const data = await res.json();

@@ -4,6 +4,7 @@ import { useState } from "react";
 import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import ShareButtons from "@/components/ShareButtons";
+import { apiHeaders } from "@/lib/api-key";
 
 interface EdoResult {
   edo_job: string;
@@ -33,7 +34,7 @@ export default function EdoPeriodPage() {
     try {
       const res = await fetch("/api/tools/edo-period", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ job, skills, personality }),
       });
       const data = await res.json();

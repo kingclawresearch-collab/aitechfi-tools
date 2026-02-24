@@ -5,6 +5,17 @@ const WINDOW_SECONDS = 24 * 60 * 60;
 const MAX_REQUESTS_PER_IP = 3;
 const GLOBAL_DAILY_LIMIT = 10_000;
 
+const VIP_KEYS = new Set(
+  (process.env.VIP_API_KEYS ?? "").split(",").filter(Boolean)
+);
+
+function isVip(req: NextRequest): boolean {
+  const key =
+    req.headers.get("x-api-key") ??
+    req.nextUrl.searchParams.get("api_key");
+  return !!key && VIP_KEYS.has(key);
+}
+
 let redis: Redis | null = null;
 if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
   redis = new Redis({
@@ -80,6 +91,10 @@ function checkIpMemory(ip: string): { allowed: boolean; remaining: number } {
 export async function checkRateLimit(
   req: NextRequest
 ): Promise<{ allowed: boolean; remaining: number }> {
+  if (isVip(req)) {
+    return { allowed: true, remaining: 999 };
+  }
+
   const ip = getIp(req);
 
   if (redis) {

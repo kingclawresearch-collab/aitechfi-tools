@@ -5,6 +5,7 @@ import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import ScoreGauge from "@/components/ScoreGauge";
 import ShareButtons from "@/components/ShareButtons";
+import { apiHeaders } from "@/lib/api-key";
 
 interface AggressivePhrase {
   phrase: string;
@@ -41,7 +42,7 @@ export default function MailToxicityPage() {
     try {
       const res = await fetch("/api/tools/mail-toxicity", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ text }),
       });
 

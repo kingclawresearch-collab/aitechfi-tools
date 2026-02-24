@@ -5,6 +5,7 @@ import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import ScoreGauge from "@/components/ScoreGauge";
 import ShareButtons from "@/components/ShareButtons";
+import { apiHeaders } from "@/lib/api-key";
 
 interface PromptResult {
   quality_score: number;
@@ -46,7 +47,7 @@ export default function PromptCheckerPage() {
     try {
       const res = await fetch("/api/tools/prompt-checker", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ text }),
       });
       const data = await res.json();

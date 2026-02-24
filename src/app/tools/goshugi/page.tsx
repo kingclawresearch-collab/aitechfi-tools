@@ -4,6 +4,7 @@ import { useState } from "react";
 import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import ShareButtons from "@/components/ShareButtons";
+import { apiHeaders } from "@/lib/api-key";
 
 interface GoshugiResult {
   amount: number;
@@ -34,7 +35,7 @@ export default function GoshugiPage() {
     try {
       const res = await fetch("/api/tools/goshugi", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ event, relationship, age, region }),
       });
       const data = await res.json();

@@ -4,6 +4,7 @@ import { useState } from "react";
 import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import ShareButtons from "@/components/ShareButtons";
+import { apiHeaders } from "@/lib/api-key";
 
 interface WikiResult {
   article: string;
@@ -29,7 +30,7 @@ export default function WikipediaPage() {
     try {
       const res = await fetch("/api/tools/wikipedia", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ name, career, hobbies, highlights }),
       });
       const data = await res.json();

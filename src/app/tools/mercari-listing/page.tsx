@@ -3,6 +3,7 @@
 import { useState } from "react";
 import AdBanner from "@/components/AdBanner";
 import AffiliateLinks from "@/components/AffiliateLinks";
+import { apiHeaders } from "@/lib/api-key";
 
 interface MercariResult {
   title: string;
@@ -46,7 +47,7 @@ export default function MercariListingPage() {
     try {
       const res = await fetch("/api/tools/mercari-listing", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: apiHeaders(),
         body: JSON.stringify({ product, condition, details }),
       });
       const data = await res.json();

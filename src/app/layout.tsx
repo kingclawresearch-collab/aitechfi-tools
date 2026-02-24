@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { Suspense } from "react";
+import ApiKeyCapture from "@/components/ApiKeyCapture";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -65,6 +67,9 @@ export default function RootLayout({
           </div>
         </header>
 
+        <Suspense>
+          <ApiKeyCapture />
+        </Suspense>
         <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
 
         <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-500 dark:border-gray-800 dark:text-gray-500">
